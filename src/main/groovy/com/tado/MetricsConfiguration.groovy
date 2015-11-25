@@ -2,6 +2,7 @@ package com.tado
 
 import com.codahale.metrics.MetricRegistry
 import com.codahale.metrics.Slf4jReporter
+import com.readytalk.metrics.StatsDReporter
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.properties.ConfigurationProperties
@@ -16,6 +17,11 @@ class MetricsConfiguration {
 
    int reportInterval
 
+   boolean statsDEnabed
+   String statsDHost
+   int statsDPort
+   String statsDPrefix
+
    @Autowired
    MetricRegistry metricRegistry
 
@@ -28,5 +34,12 @@ class MetricsConfiguration {
          .convertDurationsTo(TimeUnit.MILLISECONDS)
          .build()
          .start(reportInterval, TimeUnit.SECONDS)
+
+      if (statsDEnabed) {
+         StatsDReporter.forRegistry(metricRegistry)
+            .prefixedWith(statsDPrefix)
+            .build(statsDHost, statsDPort)
+            .start(reportInterval, TimeUnit.SECONDS);
+      }
    }
 }
