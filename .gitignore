@@ -1,0 +1,17 @@
+## IDE
+# IntelliJ IDEA
+.idea/
+.idea_modules/
+*.ipr
+*.iws
+*.iml
+
+## OS
+.DS_Store
+
+## Gradle
+.gradle
+build/
+out/
+# Ignore Gradle GUI config
+gradle-app.setting
