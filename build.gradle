@@ -1,0 +1,48 @@
+buildscript {
+   ext {
+      springBootVersion = '1.3.0.RELEASE'
+   }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+   }
+}
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+
+jar {
+   baseName = 'devopsdemo'
+   version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+   mavenCentral()
+}
+
+
+dependencies {
+   compile 'org.codehaus.groovy:groovy-all:2.4.5'
+   compile 'org.springframework.boot:spring-boot-starter-web'
+   testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.7'
+}
+
+idea {
+   module {
+      inheritOutputDirs = false
+      outputDir = file("$buildDir/classes/main/")
+   }
+}
+
+bootRepackage {
+   mainClass = 'com.tado.DevOpsDemoApplication'
+}
