@@ -29,6 +29,10 @@ repositories {
 dependencies {
    compile 'org.codehaus.groovy:groovy-all:2.4.5'
    compile 'org.springframework.boot:spring-boot-starter-web'
+   compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+   compile 'io.dropwizard.metrics:metrics-core'
+
    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
